@@ -34,7 +34,7 @@ clean:
 	rm -rf $(BUILD_OUT_DIR)
 
 solved:
-	ls -ld -- */ | wc -l
+	ls -ld -- */ | grep -vE '\.vscode|bin|vendor' | wc -l
 
 loc:
 	find . -type f -not -path "./vendor/*" -name "*.go" | xargs wc -l
