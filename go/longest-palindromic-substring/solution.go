@@ -60,3 +60,48 @@ func expandFromCenter(s string, left, right int) (int, int) {
 
 	return left, right - left
 }
+
+func longestPalindromeV2(s string) string {
+
+	if len(s) == 0 {
+		return ""
+	}
+
+	if len(s) == 1 {
+		return s
+	}
+
+	start, end := 0, 0
+
+	for i := 0; i < len(s); i++ {
+		len1 := expandAroundCenter(s, i, i)   // length of odd palindrome
+		len2 := expandAroundCenter(s, i, i+1) // length of even palindrome
+		len := max(len1, len2)
+		if len > end-start+1 {
+			start = i - (len-1)/2
+			end = i + len/2
+		}
+	}
+
+	return s[start : end+1]
+}
+
+func expandAroundCenter(s string, left, right int) int {
+	l := left
+	r := right
+
+	for l >= 0 && r < len(s) && s[l] == s[r] {
+		l -= 1
+		r += 1
+	}
+
+	return r - l - 1
+}
+
+func max(a, b int) int {
+	if a >= b {
+		return a
+	}
+
+	return b
+}
