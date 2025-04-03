@@ -1,3 +1,3 @@
 module github.com/natac13/leetcode/go
 
-go 1.20
+go 1.22
